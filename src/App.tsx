@@ -8,7 +8,7 @@
  *             inactive thumbs = scaled down + dimmed
  */
 
-import { FC, ReactNode, useRef, useState, useEffect, useCallback } from "react";
+import { type FC, type ReactNode, useRef, useState, useEffect, useCallback } from "react";
 import "./App.css";
 
 // ---------------------------------------------------------------------------
@@ -60,7 +60,7 @@ const VideoPlayer: FC<VideoPlayerProps> = ({ clips, title }) => {
   const hasInteracted = useRef(false);
 
   useEffect(() => {
-    return registerPlayer(pauseSelf);
+    registerPlayer(pauseSelf);
   }, [pauseSelf]);
 
   // Set thumbnail srcs via JS on mount
@@ -177,9 +177,9 @@ const FriendlyDesc: FC<{ children: ReactNode }> = ({ children }) => (
   <div className="friendly-desc">{children}</div>
 );
 
-const SubsectionTitle: FC<{ children: ReactNode }> = ({ children }) => (
-  <p className="subsection-title">{children}</p>
-);
+// const SubsectionTitle: FC<{ children: ReactNode }> = ({ children }) => (
+//   <p className="subsection-title">{children}</p>
+// );
 
 // ---------------------------------------------------------------------------
 // StickyNav

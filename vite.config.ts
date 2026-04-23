@@ -12,5 +12,6 @@ export default defineConfig({
   ],
   server: {
     allowedHosts: true
-  }
+  },
+  base: "/mocap2-demopage/"
 })
