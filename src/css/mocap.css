@@ -79,12 +79,12 @@ body {
 }
 
 .subsection-title {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #363636;
   width: 80%;
-  margin: 24px auto 10px auto;
-  padding-bottom: 6px;
+  margin: 28px auto 12px auto;
+  padding-bottom: 8px;
   border-bottom: 2px solid #dbdbdb;
 }
 
@@ -104,11 +104,40 @@ body {
 
 .vp-main-video {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 5 / 3;
   object-fit: contain;
   background: #000;
   border-radius: 8px 8px 0 0;
   display: block;
+}
+.vp-main-video.wide {
+  aspect-ratio: 2.5 / 1;
+}
+.vp-main-video.ultrawide {
+  aspect-ratio: 5 / 1;
+}
+.vp-main-video.with-labels {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.vp-split-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.vp-split-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #333;
+  padding: 6px 0;
+  min-width: 32px;
+  letter-spacing: 0.04em;
 }
 
 .vp-main-caption {
