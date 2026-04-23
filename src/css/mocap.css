@@ -1,0 +1,214 @@
+/* MoCapAnything.css
+   Import this alongside your Tailwind stylesheet.
+   Font: Noto Sans (loaded via Google Fonts or your font config).
+*/
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
+/* Fonts loaded via Google Fonts — ensure this is in your <head>:
+   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+*/
+
+.friendly-desc {
+  font-size: 1.05rem;
+  color: #555;
+  width: 80%;
+  margin: 0 auto 20px auto;
+  text-align: left;
+  line-height: 1.5em;
+}
+
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.sticky-nav a {
+  margin: 0 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #3273dc;
+  text-decoration: none;
+}
+.sticky-nav a:hover {
+  text-decoration: underline;
+}
+
+.video-gallery {
+  display: grid;
+  gap: 10px;
+  width: 80%;
+  margin: 0 auto 30px auto;
+}
+.video-gallery.cols-1 {
+  grid-template-columns: 1fr;
+}
+.video-gallery.cols-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 600px) {
+  .video-gallery.cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.video-gallery-item {
+  background: #111;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.video-gallery-item video {
+  width: 100%;
+  display: block;
+}
+.video-gallery-item .cap {
+  padding: 5px 8px;
+  font-size: 0.8rem;
+  color: #bbb;
+  font-weight: 600;
+  background: #111;
+  text-align: center;
+}
+
+.subsection-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #363636;
+  width: 80%;
+  margin: 24px auto 10px auto;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #dbdbdb;
+}
+
+/* ── VideoPlayer ─────────────────────────────────────────── */
+
+.vp-wrapper {
+  width: 80%;
+  margin: 0 auto 32px auto;
+}
+
+/* Main player — full width */
+.vp-player-col {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.vp-main-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #000;
+  border-radius: 8px 8px 0 0;
+  display: block;
+}
+
+.vp-main-caption {
+  font-size: 0.85rem;
+  color: #555;
+  text-align: center;
+  padding: 6px 0 10px;
+}
+
+/* Thumbnail strip — horizontal, below the player */
+.vp-thumb-strip {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: visible; /* allow upward pop on active */
+  padding: 16px 4px 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #bbb #f0f0f0;
+  /* extra bottom padding so shadow of active thumb isn't clipped */
+  padding-bottom: 16px;
+}
+.vp-thumb-strip::-webkit-scrollbar {
+  height: 4px;
+}
+.vp-thumb-strip::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+.vp-thumb-strip::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+
+/* Each thumbnail button */
+.vp-thumb-btn {
+  flex-shrink: 0;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: #1a1a1a;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  /* inactive: dimmed + slightly smaller */
+  opacity: 0.45;
+  transform: scale(0.93);
+  transform-origin: bottom center;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Hover: brighten a little */
+.vp-thumb-btn:hover {
+  opacity: 0.75;
+  transform: scale(0.96);
+  border-color: #888;
+}
+
+/* Active: pop up + full brightness + blue outline */
+.vp-thumb-btn.active {
+  opacity: 1;
+  transform: scale(1.08) translateY(-6px);
+  border-color: #3273dc;
+  box-shadow: 0 6px 18px rgba(50, 115, 220, 0.35);
+}
+
+.vp-thumb-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.vp-thumb-caption {
+  font-size: 0.68rem;
+  color: #ccc;
+  padding: 4px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: #111;
+  text-align: center;
+}
+
+/* Active caption: white text */
+.vp-thumb-btn.active .vp-thumb-caption {
+  color: #fff;
+  background: #1a3a6e;
+}
+
+@media (max-width: 600px) {
+  .vp-thumb-btn {
+    width: 110px;
+  }
+}
