@@ -197,7 +197,10 @@ const FriendlyDesc: FC<{ children: ReactNode }> = ({ children }) => (
 // ---------------------------------------------------------------------------
 
 const NAV_LINKS = [
-  { href: "#method",        label: "Framework" },
+  { href: "#video",         label: "Video" },
+  { href: "#abstract",      label: "Abstract" },
+  { href: "#overview",      label: "Overview" },
+  { href: "#framework",     label: "Framework" },
   { href: "#demo",          label: "MoCapAnything" },
   { href: "#dance",         label: "Dance Anything" },
   { href: "#one2many",      label: "Retarget Anything" },
@@ -211,6 +214,43 @@ const StickyNav: FC = () => (
     ))}
   </nav>
 );
+
+const SideNav: FC = () => {
+  const [active, setActive] = useState<string>("");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
+      },
+      { rootMargin: "-30% 0px -60% 0px" }
+    );
+
+    NAV_LINKS.forEach((l) => {
+      const el = document.getElementById(l.href.slice(1));
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <nav className="side-nav" aria-label="Section progress">
+      {NAV_LINKS.map((l) => {
+        const id = l.href.slice(1);
+        const isActive = active === id;
+        return (
+          <a key={l.href} href={l.href} className={isActive ? "active" : ""}>
+            <span className="dot" />
+            <span className="label">{l.label}</span>
+          </a>
+        );
+      })}
+    </nav>
+  );
+};
 
 // ---------------------------------------------------------------------------
 // HeroSection
@@ -245,11 +285,46 @@ const AuthorsSection: FC = () => (
 );
 
 // ---------------------------------------------------------------------------
+// TeaserVideoSection
+// ---------------------------------------------------------------------------
+
+const TeaserVideoSection: FC = () => (
+  <section id="video" className="section">
+    <div className="container has-text-centered">
+      <h2 className="title is-4">90-Second Quick View (Best with 🔊 Sound on)</h2>
+      <div
+        style={{
+          display: "inline-block",
+          padding: "14px",
+          background: "#0e0e0e",
+          borderRadius: "14px",
+          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.25)",
+          maxWidth: "1280px",
+          width: "100%",
+        }}
+      >
+        <video
+          style={{ display: "block", width: "100%", borderRadius: "6px" }}
+          src="assets/outputs_demo/mocapv2_teaser.mp4"
+          controls
+          autoPlay
+          muted
+          playsInline
+        />
+      </div>
+      <p style={{ fontSize: "0.95rem", color: "#666", marginTop: "1rem", fontStyle: "italic" }}>
+        A 90-second overview. See the sections below for detailed comparisons and results.
+      </p>
+    </div>
+  </section>
+);
+
+// ---------------------------------------------------------------------------
 // AbstractSection
 // ---------------------------------------------------------------------------
 
 const AbstractSection: FC = () => (
-  <section className="section">
+  <section id="abstract" className="section">
     <div className="container">
       <h2 className="title is-3 has-text-centered">Abstract</h2>
       <div className="content has-text-justified">
@@ -300,7 +375,21 @@ const AbstractSection: FC = () => (
 const MethodSection: FC = () => (
   <section id="method" className="section">
     <div className="container has-text-centered">
-      <h2 className="title is-3">Framework</h2>
+      <h2 id="overview" className="title is-3">Overview</h2>
+      <img
+        style={{ width: "80%" }}
+        src="assets/figure/teaser.png"
+        alt="MoCapAnything V2 Overview"
+      />
+      <FriendlyDesc>
+        Overview of MoCapAnything V2. Unlike V1, which depends on mesh-conditioned
+        video-to-pose estimation and analytical inverse kinematics (IK) for rotation
+        recovery, V2 eliminates mesh conditioning and introduces a fully learnable
+        Pose2Rot module. The entire pipeline is optimized end-to-end, enabling
+        bidirectional coupling between pose and rotation for improved robustness and
+        animation-ready motion synthesis.
+      </FriendlyDesc>
+      <h2 id="framework" className="title is-3" style={{ marginTop: "3rem" }}>Framework</h2>
       <img
         style={{ width: "80%" }}
         src="assets/figure/framework.png"
@@ -355,9 +444,10 @@ const DEMO_ZOO_CLIPS: VideoClip[] = [
 
 const DEMO_WILD_CLIPS: VideoClip[] = [
   { src: "assets/outputs_demo/mocap_demo/wild/wild_01_Eagle_Eagle_Act2.mp4",       caption: "Eagle" },
-  { src: "assets/outputs_demo/mocap_demo/wild/wild_02_Dog_Dog_Act2.mp4",           caption: "Dog #2" },
-  { src: "assets/outputs_demo/mocap_demo/wild/wild_03_Chicken_Chicken_Act2.mp4",   caption: "Chicken" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_04_Jaguar_Jaguar_Act2.mp4",     caption: "Jaguar" },
+  { src: "assets/outputs_demo/mocap_demo/wild/wild_03_Chicken_Chicken_Act2.mp4",   caption: "Chicken" },
+  { src: "assets/outputs_demo/mocap_demo/wild/wild_12_Leapord_Leapord_Act4.mp4",   caption: "Leopard" },
+  { src: "assets/outputs_demo/mocap_demo/wild/wild_02_Dog_Dog_Act2.mp4",           caption: "Dog #2" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_05_Parrot_Parrot_Act1.mp4",     caption: "Parrot" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_06_Bear_Bear_Act0.mp4",         caption: "Bear" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_07_Tyranno_Tyranno_Act1.mp4",   caption: "Tyrannosaurus" },
@@ -365,7 +455,6 @@ const DEMO_WILD_CLIPS: VideoClip[] = [
   { src: "assets/outputs_demo/mocap_demo/wild/wild_09_Buffalo_Buffalo-Act0.mp4",   caption: "Buffalo" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_10_Dog_Dog_Act1.mp4",           caption: "Dog #1" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_11_Camel_Camel-Act2.mp4",       caption: "Camel" },
-  { src: "assets/outputs_demo/mocap_demo/wild/wild_12_Leapord_Leapord_Act4.mp4",   caption: "Leopard" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_13_Coyote_Coyote_Act1.mp4",     caption: "Coyote" },
   { src: "assets/outputs_demo/mocap_demo/wild/wild_14_Lion_Lion_Act2.mp4",         caption: "Lion #2" },
 ];
@@ -478,12 +567,11 @@ const OBJ_CLIPS: VideoClip[] = [
 ];
 
 const WILD_CLIPS: VideoClip[] = [
-  // User-curated top 6
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Eagle_Eagle_Act2.mp4",       caption: "Eagle" },
-  { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Dog_Dog_Act2.mp4",           caption: "Dog #2" },
-  { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Chicken_Chicken_Act2.mp4",   caption: "Chicken" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Jaguar_Jaguar_Act2.mp4",     caption: "Jaguar" },
-  // Rest, interleaved for diversity
+  { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Chicken_Chicken_Act2.mp4",   caption: "Chicken" },
+  { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Leapord_Leapord_Act4.mp4",   caption: "Leopard" },
+  { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Dog_Dog_Act2.mp4",           caption: "Dog #2" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Parrot_Parrot_Act1.mp4",     caption: "Parrot" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Bear_Bear_Act0.mp4",         caption: "Bear" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Tyranno_Tyranno_Act1.mp4",   caption: "Tyrannosaurus" },
@@ -491,7 +579,6 @@ const WILD_CLIPS: VideoClip[] = [
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Buffalo_Buffalo-Act0.mp4",   caption: "Buffalo" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Dog_Dog_Act1.mp4",           caption: "Dog #1" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Camel_Camel-Act2.mp4",       caption: "Camel" },
-  { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Leapord_Leapord_Act4.mp4",   caption: "Leopard" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Coyote_Coyote_Act1.mp4",     caption: "Coyote" },
   { src: "assets/outputs_demo/mocap_demo_one2many_v2/v2/selected_nbg_wild_Lion_Lion_Act2.mp4",         caption: "Lion #2" },
 ];
@@ -598,10 +685,12 @@ const CitationSection: FC = () => (
 export default function App() {
   return (
     <div className="wrapper" style={{ width: "80%" }}>
+      <SideNav />
       <HeroSection />
       <AuthorsSection />
-      <AbstractSection />
       <StickyNav />
+      <TeaserVideoSection />
+      <AbstractSection />
       <MethodSection />
       <DemoSection />
       <DanceSection />
