@@ -262,6 +262,26 @@ const HeroSection: FC = () => (
         <h1 className="title is-2">
           MoCapAnything V2: End-to-End Learning of Generalizable Motion
         </h1>
+        <div className="buttons is-centered" style={{ marginTop: "1.5rem", gap: "0.75rem" }}>
+          <a
+            className="button is-dark is-rounded"
+            href="#"
+            aria-disabled="true"
+            style={{ opacity: 0.55, pointerEvents: "none" }}
+          >
+            <span className="icon"><i className="fas fa-file-pdf" /></span>
+            <span>Paper (arXiv)</span>
+          </a>
+          <a
+            className="button is-dark is-rounded"
+            href="#"
+            aria-disabled="true"
+            style={{ opacity: 0.55, pointerEvents: "none" }}
+          >
+            <span className="icon"><i className="fab fa-github" /></span>
+            <span>Code</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
