@@ -328,39 +328,33 @@ const AbstractSection: FC = () => (
       <h2 className="title is-3 has-text-centered">Abstract</h2>
       <div className="content has-text-justified">
         <p>
-          Recent methods for arbitrary-skeleton motion capture from monocular video adopt a{" "}
-          <em>factorized</em> pipeline: a learned Video-to-Pose network predicts joint
-          positions, which are then converted into joint rotations by an analytical,
-          constraint-aware inverse-kinematics (IK) stage. This split carries two coupled costs.
-          Any analytical pose-to-rotation solver, however rich its hand-crafted constraints,
-          cannot resolve under-constrained degrees of freedom such as bone-axis twist, nor
-          adapt to the noise distribution of predicted poses at inference time; and the two
-          stages cannot co-adapt, since the pose predictor is optimized purely for positional
-          accuracy and cannot reshape its output to better serve the ultimate rotation
-          objective.
+          Recent methods for arbitrary-skeleton motion capture from monocular video follow a
+          factorized pipeline, where a Video-to-Pose network predicts joint positions and an
+          analytical inverse-kinematics (IK) stage recovers joint rotations. While effective,
+          this design is inherently limited, since joint positions do not fully determine
+          rotations and leave degrees of freedom such as bone-axis twist ambiguous, and
+          meanwhile the non-differentiable IK stage prevents the system from adapting to noisy
+          predictions or optimizing for the final animation objective.
         </p>
         <p>
-          We present the first <em>fully end-to-end</em> framework for arbitrary-skeleton
-          motion capture, in which both Video-to-Pose and Pose-to-Rotation are learnable
-          neural modules and are <em>jointly trained</em>. The enabling insight is that the
-          pose-to-rotation mapping, while ill-posed in isolation, becomes a well-constrained
-          conditional prediction task once anchored on a single reference pose–rotation pair
-          from the target asset — information that is naturally available whenever a rigged
-          skeleton is supplied. Once pose-to-rotation is learnable, joint training lets the
-          intermediate pose representation <em>reshape itself</em> to serve the final rotation
-          objective. We further show that the learned mesh intermediate used as a
-          video-to-joint bridge in prior work can be removed without loss of accuracy:
-          predicted-mesh errors compound through the pipeline at inference time, and a purely
-          vision-driven pose predictor is both more robust and substantially faster. Both
+          In this work, we instead present the first <em>fully end-to-end</em> framework,
+          where both Video-to-Pose and Pose-to-Rotation are learnable and jointly optimized.
+          Crucially, we observe that the ambiguity in pose-to-rotation mapping arises from
+          missing coordinate-system information, as the same joint positions can correspond to
+          different rotations under different rest poses and local axis conventions, and to
+          resolve this we introduce a reference pose–rotation pair from the target asset,
+          which together with the rest pose not only anchors the mapping but also defines the
+          underlying rotation coordinate system. This turns rotation prediction into a
+          well-constrained conditional problem and enables effective learning.
+        </p>
+        <p>
+          In addition, our model predicts joint positions directly from video without relying
+          on mesh intermediates, which improves both robustness and efficiency, and both
           stages share a skeleton-aware Global-Local Graph-guided Multi-Head Attention
-          (GL-GMHA) block that alternates between kinematic-chain-local and skeleton-global
-          reasoning.
-        </p>
-        <p>
-          Across Truebones Zoo (spanning seen, rare, and unseen skeletons) and Objaverse
-          benchmarks, our method reduces the average rotation angle error from ~17° (V1
-          factorized pipeline with IK) to ~10°, and from 23–25° to 6.68° on unseen skeletons
-          specifically, while running ~40× faster at inference than mesh-based pipelines.
+          (GL-GMHA) module for joint-level local reasoning and global coordination.
+          Experiments on Truebones Zoo and Objaverse show that our method reduces rotation
+          error from ~17° to ~10°, and to 6.54° on unseen skeletons, while achieving ~20×
+          faster inference than mesh-based pipelines.
         </p>
       </div>
     </div>
