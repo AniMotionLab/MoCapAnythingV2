@@ -197,14 +197,13 @@ const FriendlyDesc: FC<{ children: ReactNode }> = ({ children }) => (
 // ---------------------------------------------------------------------------
 
 const NAV_LINKS = [
-  { href: "#video",         label: "Video" },
+  { href: "#video",         label: "Quick View" },
   { href: "#abstract",      label: "Abstract" },
-  { href: "#overview",      label: "Overview" },
-  { href: "#framework",     label: "Framework" },
+  { href: "#method",        label: "Method" },
   { href: "#demo",          label: "MoCapAnything" },
   { href: "#dance",         label: "Dance Anything" },
   { href: "#one2many",      label: "Retarget Anything" },
-  { href: "#mocap-compare", label: "V1 vs. V2" },
+  { href: "#mocap-compare", label: "V1 vs. V2 Results" },
 ];
 
 const StickyNav: FC = () => (
@@ -375,21 +374,38 @@ const AbstractSection: FC = () => (
 const MethodSection: FC = () => (
   <section id="method" className="section">
     <div className="container has-text-centered">
-      <h2 id="overview" className="title is-3">Overview</h2>
+      <h2 className="title is-3">Method</h2>
+
+      <h3 id="overview" className="title is-4" style={{ marginTop: "2rem" }}>Overview</h3>
       <img
         style={{ width: "80%" }}
         src="assets/figure/teaser.png"
         alt="MoCapAnything V2 Overview"
       />
       <FriendlyDesc>
-        Overview of MoCapAnything V2. Unlike V1, which depends on mesh-conditioned
+        Overview of MoCapAnything V2. Given an input video of a human or an animal, our
+        method infers a topology-agnostic skeleton sequence across diverse skeleton
+        topologies. Conditioned on a reference asset, the model predicts animation-ready
+        rotations via an end-to-end framework, enabling the reference asset to perform
+        the input motion.
+      </FriendlyDesc>
+
+      <h3 id="comparison" className="title is-4" style={{ marginTop: "3rem" }}>V1 vs V2</h3>
+      <img
+        style={{ width: "80%" }}
+        src="assets/figure/difference_V1V2.png"
+        alt="MoCapAnything V1 vs V2 Comparison"
+      />
+      <FriendlyDesc>
+        Comparison of MoCapAnything V1 and V2. Unlike V1, which depends on mesh-conditioned
         video-to-pose estimation and analytical inverse kinematics (IK) for rotation
         recovery, V2 eliminates mesh conditioning and introduces a fully learnable
         Pose2Rot module. The entire pipeline is optimized end-to-end, enabling
         bidirectional coupling between pose and rotation for improved robustness and
         animation-ready motion synthesis.
       </FriendlyDesc>
-      <h2 id="framework" className="title is-3" style={{ marginTop: "3rem" }}>Framework</h2>
+
+      <h3 id="framework" className="title is-4" style={{ marginTop: "3rem" }}>Framework</h3>
       <img
         style={{ width: "80%" }}
         src="assets/figure/framework.png"
@@ -653,7 +669,15 @@ const DanceSection: FC = () => (
 // CitationSection
 // ---------------------------------------------------------------------------
 
-const BIBTEX = `Placeholder`;
+const BIBTEX = `@article{gong2026mocapanythingv2,
+  title   = {MoCapAnything V2: End-to-End Motion Capture for Arbitrary Skeletons},
+  author  = {Gong, Kehong and Wen, Zhengyu and Phong, Dao Thien and
+             Xu, Mingxi and He, Weixia and Wang, Qi and Zhang, Ning and
+             Li, Zhengyu and Hou, Guanli and Lian, Dongze and He, Xiaoyu and
+             Zhang, Mingyuan and Zhang, Hanwang},
+  journal = {arXiv preprint arXiv:xxxx.xxxxx},
+  year    = {2026}
+}`;
 
 const CitationSection: FC = () => (
   <section className="section">
@@ -679,6 +703,23 @@ const CitationSection: FC = () => (
 );
 
 // ---------------------------------------------------------------------------
+// AcknowledgementSection
+// ---------------------------------------------------------------------------
+
+const AcknowledgementSection: FC = () => (
+  <section className="section">
+    <div className="container has-text-centered">
+      <h2 className="title is-4">Acknowledgement</h2>
+      <p className="friendly-desc" style={{ textAlign: "center", width: "70%", marginTop: 15 }}>
+        We referred to the project page of{" "}
+        <a href="https://nerfies.github.io/" target="_blank" rel="noopener noreferrer">Nerfies</a>
+        {" "}when creating this project page.
+      </p>
+    </div>
+  </section>
+);
+
+// ---------------------------------------------------------------------------
 // App
 // ---------------------------------------------------------------------------
 
@@ -697,6 +738,7 @@ export default function App() {
       <OneToManySection />
       <PerAnimalSection />
       <CitationSection />
+      <AcknowledgementSection />
     </div>
   );
 }
