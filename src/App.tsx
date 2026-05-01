@@ -798,28 +798,73 @@ const BIBTEX = `@article{gong2026mocapanythingv2,
   year    = {2026}
 }`;
 
-const CitationSection: FC = () => (
-  <section className="section">
-    <div className="container has-text-centered">
-      <h2 className="title is-4">Citation</h2>
-      <p className="friendly-desc" style={{ textAlign: "center", width: "60%", marginTop: 15 }}>
-        If you find our work useful, please cite:
-      </p>
-      <pre style={{
-        textAlign: "left",
-        width: "70%",
-        margin: "0 auto",
-        background: "#f7f7f7",
-        padding: 15,
-        borderRadius: 8,
-        fontSize: "0.9rem",
-        whiteSpace: "pre-wrap",
-      }}>
-        {BIBTEX}
-      </pre>
-    </div>
-  </section>
-);
+const CitationSection: FC = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(BIBTEX);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1800);
+  };
+
+  return (
+    <section className="section">
+      <div className="container has-text-centered">
+        <h2 className="title is-4">Citation</h2>
+        <p className="friendly-desc" style={{ textAlign: "center", width: "60%", marginTop: 15 }}>
+          If you find our work useful, please cite:
+        </p>
+        <div style={{ position: "relative", width: "70%", margin: "0 auto" }}>
+          <button
+            onClick={handleCopy}
+            aria-label="Copy BibTeX"
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              padding: "6px 12px",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              color: copied ? "#fff" : "#444",
+              background: copied ? "#23a55a" : "rgba(255,255,255,0.9)",
+              border: "1px solid rgba(0,0,0,0.12)",
+              borderRadius: 6,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              transition: "background 0.15s ease, color 0.15s ease",
+              zIndex: 1,
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              {copied ? (
+                <polyline points="20 6 9 17 4 12" />
+              ) : (
+                <>
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </>
+              )}
+            </svg>
+            {copied ? "Copied" : "Copy"}
+          </button>
+          <pre style={{
+            textAlign: "left",
+            margin: 0,
+            background: "#f7f7f7",
+            padding: 15,
+            borderRadius: 8,
+            fontSize: "0.9rem",
+            whiteSpace: "pre-wrap",
+          }}>
+            {BIBTEX}
+          </pre>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 // ---------------------------------------------------------------------------
 // AcknowledgementSection
