@@ -794,7 +794,7 @@ const BIBTEX = `@article{gong2026mocapanythingv2,
              Xu, Mingxi and He, Weixia and Wang, Qi and Zhang, Ning and
              Li, Zhengyu and Hou, Guanli and Lian, Dongze and He, Xiaoyu and
              Zhang, Mingyuan and Zhang, Hanwang},
-  journal = {arXiv preprint arXiv:xxxx.xxxxx},
+  journal = {arXiv preprint arXiv:2604.28130},
   year    = {2026}
 }`;
 
