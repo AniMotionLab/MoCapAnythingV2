@@ -269,7 +269,11 @@ const HeroSection: FC = () => (
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="icon"><i className="fas fa-file-pdf" /></span>
+            <span className="icon">
+              <svg width="20" height="20" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true">
+                <path d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"/>
+              </svg>
+            </span>
             <span>Paper (arXiv)</span>
           </a>
           <a
@@ -278,7 +282,11 @@ const HeroSection: FC = () => (
             aria-disabled="true"
             style={{ opacity: 0.55, pointerEvents: "none" }}
           >
-            <span className="icon"><i className="fab fa-github" /></span>
+            <span className="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+            </span>
             <span>GitHub</span>
           </a>
         </div>
@@ -376,45 +384,45 @@ const TeaserVideoSection: FC = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              gap: "18px",
+              gap: "28px",
             }}>
               <button
                 onClick={() => handleStart(true)}
                 style={{
-                  padding: "14px 32px",
-                  fontSize: "1.05rem",
+                  padding: "28px 64px",
+                  fontSize: "2.1rem",
                   fontWeight: 700,
                   color: "#fff",
                   background: "linear-gradient(135deg, #3273dc, #2855b3)",
                   border: "none",
                   borderRadius: "999px",
                   cursor: "pointer",
-                  boxShadow: "0 4px 18px rgba(50,115,220,0.45)",
+                  boxShadow: "0 8px 32px rgba(50,115,220,0.5)",
                   display: "flex",
                   alignItems: "center",
-                  gap: "10px",
+                  gap: "16px",
                   letterSpacing: "0.02em",
                   transition: "transform 0.15s ease, box-shadow 0.15s ease",
                 }}
                 onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.05)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)"; }}
               >
-                <span style={{ fontSize: "1.25rem" }}>🔊</span> Play with Sound
+                <span style={{ fontSize: "2.5rem" }}>🔊</span> Play with Sound
               </button>
               <button
                 onClick={() => handleStart(false)}
                 style={{
-                  padding: "12px 28px",
-                  fontSize: "0.95rem",
+                  padding: "24px 56px",
+                  fontSize: "1.9rem",
                   fontWeight: 600,
                   color: "#ddd",
                   background: "rgba(255,255,255,0.12)",
-                  border: "1.5px solid rgba(255,255,255,0.35)",
+                  border: "2px solid rgba(255,255,255,0.35)",
                   borderRadius: "999px",
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
-                  gap: "10px",
+                  gap: "16px",
                   backdropFilter: "blur(6px)",
                   letterSpacing: "0.02em",
                   transition: "transform 0.15s ease, background 0.15s ease",
@@ -422,7 +430,7 @@ const TeaserVideoSection: FC = () => {
                 onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.22)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.12)"; }}
               >
-                <span style={{ fontSize: "1.1rem" }}>🔇</span> Play without Sound
+                <span style={{ fontSize: "2.2rem" }}>🔇</span> Play without Sound
               </button>
             </div>
           )}
