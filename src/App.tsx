@@ -785,6 +785,55 @@ const DanceSection: FC = () => (
 );
 
 // ---------------------------------------------------------------------------
+// RelatedWorksSection
+// ---------------------------------------------------------------------------
+
+interface RelatedWork {
+  title: string;
+  subtitle: string;
+  projectUrl: string;
+  arxivUrl: string;
+}
+
+const RELATED_WORKS: RelatedWork[] = [
+  {
+    title: "SWiT-4D",
+    subtitle: "Sliding-Window Transformer for Lossless and Parameter-Free Temporal 4D Generation",
+    projectUrl: "https://animotionlab.github.io/SWIT4D/",
+    arxivUrl: "https://arxiv.org/abs/2512.10860",
+  },
+  {
+    title: "MoCapAnything",
+    subtitle: "Unified 3D Motion Capture for Arbitrary Skeletons from Monocular Videos",
+    projectUrl: "https://animotionlab.github.io/MoCapAnything/",
+    arxivUrl: "https://arxiv.org/abs/2512.10881",
+  },
+];
+
+const RelatedWorksSection: FC = () => (
+  <section className="section">
+    <div className="container">
+      <h2 className="title is-4 has-text-centered">Our Other Works</h2>
+      <div style={{ width: "70%", margin: "1.5rem auto 0" }}>
+        {RELATED_WORKS.map((w) => (
+          <div key={w.title} style={{ marginBottom: "1.4rem" }}>
+            <p style={{ marginBottom: "0.25rem" }}>
+              <strong>{w.title}</strong>
+              <span style={{ color: "#444" }}> — {w.subtitle}</span>
+            </p>
+            <p style={{ fontSize: "0.95rem" }}>
+              <a href={w.projectUrl} target="_blank" rel="noopener noreferrer">Project Page</a>
+              <span style={{ margin: "0 0.5rem", color: "#888" }}>·</span>
+              <a href={w.arxivUrl} target="_blank" rel="noopener noreferrer">arXiv</a>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// ---------------------------------------------------------------------------
 // CitationSection
 // ---------------------------------------------------------------------------
 
@@ -901,6 +950,7 @@ export default function App() {
       <DanceSection />
       <OneToManySection />
       <PerAnimalSection />
+      <RelatedWorksSection />
       <CitationSection />
       <AcknowledgementSection />
     </div>
