@@ -278,9 +278,9 @@ const HeroSection: FC = () => (
           </a>
           <a
             className="button is-dark is-rounded"
-            href="#"
-            aria-disabled="true"
-            style={{ opacity: 0.55, pointerEvents: "none" }}
+            href="https://github.com/animotionlab26/MocapAnything"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <span className="icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
