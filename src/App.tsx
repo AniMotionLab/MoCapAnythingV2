@@ -264,7 +264,7 @@ const HeroSection: FC = () => (
         </h1>
         <div className="buttons is-centered" style={{ marginTop: "1.75rem", gap: "1rem" }}>
           <a
-            className="button is-dark is-rounded is-large"
+            className="button is-dark is-rounded"
             href="https://arxiv.org/abs/2604.28130"
             target="_blank"
             rel="noopener noreferrer"
@@ -277,7 +277,7 @@ const HeroSection: FC = () => (
             <span>Paper (arXiv)</span>
           </a>
           <a
-            className="button is-dark is-rounded is-large"
+            className="button is-dark is-rounded"
             href="#"
             aria-disabled="true"
             style={{ opacity: 0.55, pointerEvents: "none" }}
