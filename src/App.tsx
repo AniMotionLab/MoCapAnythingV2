@@ -307,36 +307,133 @@ const AuthorsSection: FC = () => (
 // TeaserVideoSection
 // ---------------------------------------------------------------------------
 
-const TeaserVideoSection: FC = () => (
-  <section id="video" className="section">
-    <div className="container has-text-centered">
-      <h2 className="title is-4">90-Second Quick View (Best with 🔊 Sound on)</h2>
-      <div
-        style={{
-          display: "inline-block",
-          padding: "14px",
-          background: "#0e0e0e",
-          borderRadius: "14px",
-          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.25)",
-          maxWidth: "1280px",
-          width: "100%",
-        }}
-      >
-        <video
-          style={{ display: "block", width: "100%", borderRadius: "6px" }}
-          src="assets/outputs_demo/mocapv2_teaser.mp4"
-          controls
-          autoPlay
-          muted
-          playsInline
-        />
+const TeaserVideoSection: FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [started, setStarted] = useState(false);
+
+  const pauseSelf = useCallback(() => {
+    videoRef.current?.pause();
+  }, []);
+
+  useEffect(() => {
+    const cleanup = registerPlayer(pauseSelf);
+    return () => { cleanup(); };
+  }, [pauseSelf]);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (!entry.isIntersecting) pauseSelf(); },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [pauseSelf]);
+
+  const handleStart = (withSound: boolean) => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !withSound;
+    pauseAllExcept(pauseSelf);
+    v.play().catch(() => {});
+    setStarted(true);
+  };
+
+  return (
+    <section id="video" className="section">
+      <div className="container has-text-centered">
+        <h2 className="title is-4">90-Second Quick View (Best with 🔊 Sound on)</h2>
+        <div
+          ref={wrapperRef}
+          style={{
+            display: "inline-block",
+            position: "relative",
+            padding: "14px",
+            background: "#0e0e0e",
+            borderRadius: "14px",
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.25)",
+            maxWidth: "1280px",
+            width: "100%",
+          }}
+        >
+          <video
+            ref={videoRef}
+            style={{ display: "block", width: "100%", borderRadius: "6px" }}
+            src="assets/outputs_demo/mocapv2_teaser.mp4"
+            controls
+            playsInline
+            onPlay={() => pauseAllExcept(pauseSelf)}
+          />
+          {!started && (
+            <div style={{
+              position: "absolute",
+              inset: "14px",
+              borderRadius: "6px",
+              background: "rgba(0,0,0,0.52)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "18px",
+            }}>
+              <button
+                onClick={() => handleStart(true)}
+                style={{
+                  padding: "14px 32px",
+                  fontSize: "1.05rem",
+                  fontWeight: 700,
+                  color: "#fff",
+                  background: "linear-gradient(135deg, #3273dc, #2855b3)",
+                  border: "none",
+                  borderRadius: "999px",
+                  cursor: "pointer",
+                  boxShadow: "0 4px 18px rgba(50,115,220,0.45)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  letterSpacing: "0.02em",
+                  transition: "transform 0.15s ease, box-shadow 0.15s ease",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.05)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)"; }}
+              >
+                <span style={{ fontSize: "1.25rem" }}>🔊</span> Play with Sound
+              </button>
+              <button
+                onClick={() => handleStart(false)}
+                style={{
+                  padding: "12px 28px",
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  color: "#ddd",
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1.5px solid rgba(255,255,255,0.35)",
+                  borderRadius: "999px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  backdropFilter: "blur(6px)",
+                  letterSpacing: "0.02em",
+                  transition: "transform 0.15s ease, background 0.15s ease",
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.22)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.12)"; }}
+              >
+                <span style={{ fontSize: "1.1rem" }}>🔇</span> Play without Sound
+              </button>
+            </div>
+          )}
+        </div>
+        <p style={{ fontSize: "0.95rem", color: "#666", marginTop: "1rem", fontStyle: "italic" }}>
+          A 90-second overview. See the sections below for detailed comparisons and results.
+        </p>
       </div>
-      <p style={{ fontSize: "0.95rem", color: "#666", marginTop: "1rem", fontStyle: "italic" }}>
-        A 90-second overview. See the sections below for detailed comparisons and results.
-      </p>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 // ---------------------------------------------------------------------------
 // AbstractSection
