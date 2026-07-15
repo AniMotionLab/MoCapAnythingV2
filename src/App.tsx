@@ -289,6 +289,26 @@ const HeroSection: FC = () => (
             </span>
             <span>GitHub</span>
           </a>
+          <a
+            className="button is-rounded"
+            href="https://huggingface.co/spaces/kehong/MoCapAnythingV2"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ background: "#ffd21e", color: "#0e0e0e", border: "none", fontWeight: 700 }}
+          >
+            <span style={{ fontSize: "1.1rem", marginRight: 6 }}>🤗</span>
+            <span>Live Demo</span>
+          </a>
+          <a
+            className="button is-rounded"
+            href="https://huggingface.co/kehong/MoCapAnythingV2-weights"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ background: "#ffedb3", color: "#0e0e0e", border: "none", fontWeight: 700 }}
+          >
+            <span style={{ fontSize: "1.1rem", marginRight: 6 }}>🤗</span>
+            <span>Weights</span>
+          </a>
         </div>
       </div>
     </div>
