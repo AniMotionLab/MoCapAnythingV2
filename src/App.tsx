@@ -339,13 +339,19 @@ const AuthorsSection: FC = () => (
         <sup>2</sup>,<br />
         <b>Zhengyu Li</b>
         <sup>2</sup>, <b>Guanli Hou</b>
-        <sup>2</sup>, <b>Dongze Lian</b>
+        <sup>2</sup>,{" "}
+        <a href="https://dongzelian.com/" target="_blank" rel="noopener noreferrer">
+          <b>Dongze Lian</b>
+        </a>
         <sup>2</sup>, <b>Xiaoyu He</b>
         <sup>2</sup>,{" "}
         <a href="https://mingyuan-zhang.github.io/" target="_blank" rel="noopener noreferrer">
           <b>Mingyuan Zhang</b>
         </a>
-        <sup>†2</sup>, <b>Hanwang Zhang</b>
+        <sup>†2</sup>,{" "}
+        <a href="https://mreallab.github.io/" target="_blank" rel="noopener noreferrer">
+          <b>Hanwang Zhang</b>
+        </a>
         <sup>2</sup>
       </p>
 
