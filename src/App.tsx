@@ -332,8 +332,14 @@ const AuthorsSection: FC = () => (
         <sup>*1</sup>,{" "}
         <b>Zhengyu Wen</b>
         <sup>*2</sup>, <b>Dao Thien Phong</b>
-        <sup>*2</sup>, <b>Mingxi Xu</b>
-        <sup>2</sup>, <b>Weixia He</b>
+        <sup>*2</sup>,{" "}
+        <a href="https://scholar.google.com/citations?user=zfrH1TcAAAAJ" target="_blank" rel="noopener noreferrer">
+          <b>Mingxi Xu</b>
+        </a>
+        <sup>2</sup>,{" "}
+        <a href="https://scholar.google.com/citations?user=YRmAiOAAAAAJ" target="_blank" rel="noopener noreferrer">
+          <b>Weixia He</b>
+        </a>
         <sup>2</sup>, <b>Qi Wang</b>
         <sup>2</sup>, <b>Ning Zhang</b>
         <sup>2</sup>,<br />
@@ -343,12 +349,18 @@ const AuthorsSection: FC = () => (
         <a href="https://dongzelian.com/" target="_blank" rel="noopener noreferrer">
           <b>Dongze Lian</b>
         </a>
-        <sup>2</sup>, <b>Xiaoyu He</b>
+        <sup>2</sup>,{" "}
+        <a href="https://scholar.google.com/citations?user=AgpsSHkAAAAJ" target="_blank" rel="noopener noreferrer">
+          <b>Xiaoyu He</b>
+        </a>
         <sup>2</sup>,{" "}
         <a href="https://mingyuan-zhang.github.io/" target="_blank" rel="noopener noreferrer">
           <b>Mingyuan Zhang</b>
         </a>
-        <sup>†2</sup>, <b>Hanwang Zhang</b>
+        <sup>†2</sup>,{" "}
+        <a href="https://scholar.google.com/citations?user=YG0DFyYAAAAJ" target="_blank" rel="noopener noreferrer">
+          <b>Hanwang Zhang</b>
+        </a>
         <sup>2</sup>
       </p>
 
