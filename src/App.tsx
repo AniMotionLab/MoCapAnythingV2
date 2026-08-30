@@ -259,10 +259,13 @@ const HeroSection: FC = () => (
   <section className="hero">
     <div className="hero-body">
       <div className="container has-text-centered">
-        <h1 className="title is-2">
+        <h1 className="title is-2" style={{ marginBottom: "0.6rem" }}>
           MoCapAnything V2: End-to-End Learning of Generalizable Motion
         </h1>
-        <div className="buttons is-centered" style={{ marginTop: "1.75rem", gap: "1rem" }}>
+        <p style={{ fontSize: "1.15rem", fontWeight: 700, color: "#00629b", letterSpacing: "0.01em" }}>
+          SIGGRAPH Asia 2026 (ACM Transactions on Graphics)
+        </p>
+        <div className="buttons is-centered" style={{ marginTop: "1.25rem", gap: "1rem" }}>
           <a
             className="button is-dark is-rounded"
             href="https://arxiv.org/abs/2604.28130"
@@ -320,9 +323,38 @@ const HeroSection: FC = () => (
 // ---------------------------------------------------------------------------
 
 const AuthorsSection: FC = () => (
-  <section className="section">
+  <section className="section" style={{ paddingTop: "0.2rem", paddingBottom: "0.5rem" }}>
     <div className="container has-text-centered">
-      <h2 className="title is-4">Authors</h2>
+      <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+        <a href="https://garfield-kh.github.io/" target="_blank" rel="noopener noreferrer">
+          <b>Kehong Gong</b>
+        </a>
+        <sup>*1</sup>,{" "}
+        <b>Zhengyu Wen</b>
+        <sup>*2</sup>, <b>Dao Thien Phong</b>
+        <sup>*2</sup>, <b>Mingxi Xu</b>
+        <sup>2</sup>, <b>Weixia He</b>
+        <sup>2</sup>, <b>Qi Wang</b>
+        <sup>2</sup>, <b>Ning Zhang</b>
+        <sup>2</sup>,<br />
+        <b>Zhengyu Li</b>
+        <sup>2</sup>, <b>Guanli Hou</b>
+        <sup>2</sup>, <b>Dongze Lian</b>
+        <sup>2</sup>, <b>Xiaoyu He</b>
+        <sup>2</sup>,{" "}
+        <a href="https://mingyuan-zhang.github.io/" target="_blank" rel="noopener noreferrer">
+          <b>Mingyuan Zhang</b>
+        </a>
+        <sup>†2</sup>, <b>Hanwang Zhang</b>
+        <sup>2</sup>
+      </p>
+
+      <p style={{ fontSize: "1rem", marginTop: 10 }}>
+        <sup>1</sup>Huawei Technologies Co., Ltd.
+        <br />
+        <sup>2</sup>Huawei Central Research Institute
+      </p>
+
       <p style={{ fontSize: "0.9rem", marginTop: 8 }}>
         <sup>*</sup>Equal Contributions &nbsp;&nbsp;
         <sup>†</sup>Corresponding Author
