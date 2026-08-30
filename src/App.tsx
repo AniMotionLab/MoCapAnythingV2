@@ -348,10 +348,7 @@ const AuthorsSection: FC = () => (
         <a href="https://mingyuan-zhang.github.io/" target="_blank" rel="noopener noreferrer">
           <b>Mingyuan Zhang</b>
         </a>
-        <sup>†2</sup>,{" "}
-        <a href="https://mreallab.github.io/" target="_blank" rel="noopener noreferrer">
-          <b>Hanwang Zhang</b>
-        </a>
+        <sup>†2</sup>, <b>Hanwang Zhang</b>
         <sup>2</sup>
       </p>
 
