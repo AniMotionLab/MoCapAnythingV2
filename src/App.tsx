@@ -262,7 +262,7 @@ const HeroSection: FC = () => (
         <h1 className="title is-2" style={{ marginBottom: "0.6rem" }}>
           MoCapAnything V2: End-to-End Learning of Generalizable Motion
         </h1>
-        <p style={{ fontSize: "1.15rem", fontWeight: 700, color: "#00629b", letterSpacing: "0.01em" }}>
+        <p style={{ fontSize: "1.6rem", fontWeight: 700, color: "#00629b", letterSpacing: "0.01em" }}>
           SIGGRAPH Asia 2026 (ACM Transactions on Graphics)
         </p>
         <div className="buttons is-centered" style={{ marginTop: "1.25rem", gap: "1rem" }}>
